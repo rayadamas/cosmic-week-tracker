@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cosmic Week Tracker and Mood Guide</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23d3ff5c' stroke='%23141414' stroke-width='2'/%3E%3Cpath d='M16 3a13 13 0 0 1 0 26a9 13 0 0 0 0-26z' fill='%23141414'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header class="appbar">
+    <h1>Cosmic Week Tracker and Mood Guide</h1>
+    <div class="appbar-meta">
+      <span class="chip" id="today-chip">Today</span>
+      <span class="chip chip-muted" id="model-chip" hidden></span>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="doc span-6">
+      <h2>Welcome to Cosmic Week Tracker</h2>
+      <p>Welcome to your Cosmic Week Tracker — a blend of astronomy, numerology, and self-reflection. Enter your birthdate and today's mood to receive your current moon phase (calculated via Julian Date and lunar cycle math), your Personal Day Number from numerology, today's planetary transits, and a personalized analysis of how the cosmos may be correlating with how you feel. All calculations are shown step-by-step so you can learn the underlying astronomy and numerology alongside the mystical interpretation.</p>
+    </section>
+
+    <section class="card card-input span-3">
+      <div class="card-header">
+        <label for="birthdate" class="card-title">Your Birthdate</label>
+      </div>
+      <div class="card-body">
+        <textarea id="birthdate" class="text-input" rows="5" inputmode="numeric" autocomplete="bday" placeholder="MM/DD/YYYY format" maxlength="10" spellcheck="false"></textarea>
+        <p class="field-error" id="birthdate-error" role="alert"></p>
+      </div>
+    </section>
+
+    <section class="field span-3">
+      <label for="mood" class="field-label">Your Mood Today</label>
+      <div class="select-wrap">
+        <select id="mood" class="select-input">
+          <option value="" disabled selected>Pick one</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="card card-ai span-2" data-widget="moon">
+      <div class="card-header">
+        <span class="card-icon" aria-hidden="true"></span>
+        <h3 class="card-title">Moon Phase Today</h3>
+        <div class="card-actions"></div>
+      </div>
+      <div class="card-body">
+        <p class="placeholder">Fill in Your Birthdate to generate content.</p>
+        <div class="content" hidden>
+          <div class="hero" data-slot="hero"></div>
+          <div class="interpretation markdown" data-slot="interpretation"></div>
+          <details class="math" open>
+            <summary>Step-by-step calculation</summary>
+            <div class="markdown steps" data-slot="steps"></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="card card-ai span-2" data-widget="numerology">
+      <div class="card-header">
+        <span class="card-icon" aria-hidden="true"></span>
+        <h3 class="card-title">Personal Day Number</h3>
+        <div class="card-actions"></div>
+      </div>
+      <div class="card-body">
+        <p class="placeholder">Fill in Your Birthdate to generate content.</p>
+        <div class="content" hidden>
+          <div class="hero" data-slot="hero"></div>
+          <div class="interpretation markdown" data-slot="interpretation"></div>
+          <details class="math" open>
+            <summary>Step-by-step calculation</summary>
+            <div class="markdown steps" data-slot="steps"></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="card card-ai span-2" data-widget="transits">
+      <div class="card-header">
+        <span class="card-icon" aria-hidden="true"></span>
+        <h3 class="card-title">Planetary Transits Today</h3>
+        <div class="card-actions"></div>
+      </div>
+      <div class="card-body">
+        <p class="placeholder">Fill in Your Birthdate to generate content.</p>
+        <div class="content" hidden>
+          <div class="hero" data-slot="hero"></div>
+          <div class="interpretation markdown" data-slot="interpretation"></div>
+          <details class="math">
+            <summary>Sky data from the ephemeris</summary>
+            <div class="markdown steps" data-slot="steps"></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="card card-ai span-6" data-widget="week">
+      <div class="card-header">
+        <span class="card-icon" aria-hidden="true"></span>
+        <h3 class="card-title">Your Cosmic Week</h3>
+      </div>
+      <div class="card-body">
+        <p class="placeholder">Fill in Your Birthdate to generate content.</p>
+        <div class="content" hidden>
+          <div class="week" data-slot="week"></div>
+          <p class="hint">Moods you log appear here, and the Cosmic Mood Correlation uses them to find real patterns over time. Your log stays in this browser.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card card-ai span-6" data-widget="correlation">
+      <div class="card-header">
+        <span class="card-icon" aria-hidden="true"></span>
+        <h3 class="card-title">Cosmic Mood Correlation</h3>
+        <div class="card-actions"></div>
+      </div>
+      <div class="card-body">
+        <p class="placeholder">Fill in Your Birthdate and Your Mood Today to generate content.</p>
+        <div class="content" hidden>
+          <div class="interpretation markdown" data-slot="interpretation"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Moon, numerology, and planetary data are computed in code from the astronomy-engine ephemeris. The AI only interprets them.
+  </footer>
+</body>
+</html>
