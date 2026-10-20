@@ -392,11 +392,6 @@ async function init() {
   state.config = await fetch('/api/config').then((r) => r.json());
   const select = $('#mood');
   for (const mood of state.config.moods) select.add(new Option(mood, mood));
-  if (state.config.llmEnabled) {
-    const chip = $('#model-chip');
-    chip.textContent = state.config.model;
-    chip.hidden = false;
-  }
 
   const savedMood = localStorage.getItem(STORAGE.mood);
   if (savedMood && state.config.moods.includes(savedMood)) select.value = savedMood;

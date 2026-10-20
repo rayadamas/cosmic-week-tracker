@@ -15,8 +15,7 @@ app.get('/vendor/marked.js', (_req, res) => res.sendFile(resolve('./node_modules
 app.get('/vendor/purify.js', (_req, res) => res.sendFile(resolve('./node_modules/dompurify/dist/purify.es.mjs')));
 
 app.get('/api/config', (_req, res) => {
-  const { apiKey, model } = llmConfig();
-  res.json({ model, llmEnabled: Boolean(apiKey), moods: MOODS });
+  res.json({ llmEnabled: Boolean(llmConfig().apiKey), moods: MOODS });
 });
 
 app.post('/api/facts', (req, res) => {
